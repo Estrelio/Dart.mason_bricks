@@ -1,0 +1,11 @@
+name: di_hooks
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  mason: ">=0.1.0-dev.57 <0.1.0"
+  common:
+    path: ../../../shared/common
+  darq: ^2.0.0
+  dartx: ^1.2.0
