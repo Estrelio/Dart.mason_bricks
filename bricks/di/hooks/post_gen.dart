@@ -28,6 +28,8 @@ import 'package:common/common.dart';
 import 'package:mason/mason.dart';
 
 import 'constant.dart';
+import 'data/style.dart';
+import 'di_implementation_writer.dart';
 
 void run(HookContext context) {
   context.dumpVariables();
@@ -38,56 +40,43 @@ void run(HookContext context) {
       (context.vars[DiConstant.implementationsKey] as List<dynamic>?)
               ?.cast<Map<String, dynamic>>()
               .map(
-            (Map<String, dynamic> entry) =>
-                entry[DiConstant.implementationsKeyKey] as String,
-          )
+                (Map<String, dynamic> entry) =>
+                    entry[DiConstant.implementationsKeyKey] as String,
+              )
               .toList() ??
           <String>[];
 
   final StringBuffer sb = StringBuffer();
-  sb.writeln('You may copy the following code to your binding file:');
+  sb.writeln('You may copy the following code to your service locator file:');
 
   void writeBindingCode() {
+    const String styleKey = DiConstant.styleKey;
+    final String style = context.vars[styleKey];
+    final GenerationStyle generationStyle = GenerationStyle.fromString(style);
+    final DiImplementationWriter diImplementationWriter =
+        (switch (generationStyle) {
+      GenerationStyle.getX => GetXDiImplementationWriter(
+          sb: sb,
+          serviceName: serviceName,
+        ),
+      GenerationStyle.getIt => GetItDiImplementationWriter(
+          sb: sb,
+          serviceName: serviceName,
+        ),
+    });
     if (implementations.isEmpty) {
       sb.writeln();
-      _writeImplementation(
-        sb: sb,
+      diImplementationWriter.write(
         implementation: null,
-        serviceName: serviceName,
       );
     }
     for (final String implementation in implementations) {
-      _writeImplementation(
-        sb: sb,
+      diImplementationWriter.write(
         implementation: implementation,
-        serviceName: serviceName,
       );
     }
   }
 
   writeBindingCode();
   context.logger.info(sb.toString());
-}
-
-void _writeImplementation({
-  required StringBuffer sb,
-  required String? implementation,
-  required String serviceName,
-}) {
-  /* Example:
-  Get.lazyPut<AppointmentRepositoryService>(
-    () => MockAppointmentRepositoryService(),
-  );
-  */
-  if (implementation != null) {
-    sb.writeln('/// ${implementation} implementation:');
-  }
-  sb.writeln(
-    'Get.lazyPut<${serviceName}>(',
-  );
-  sb.writeln(
-    '\t() => ${implementation?.pascalCase ?? ''}${serviceName}(),',
-  );
-  sb.writeln(');');
-  sb.writeln();
 }
