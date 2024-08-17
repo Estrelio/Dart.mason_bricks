@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+{{#data}}
 import 'package:{{{importRoot}}}/{{name.snakeCase()}}_view_data.dart';
+{{/data}}
 
 class {{name.pascalCase()}}View extends StatefulWidget {
 const {{name.pascalCase()}}View({
