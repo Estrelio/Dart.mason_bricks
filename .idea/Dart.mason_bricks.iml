@@ -12,6 +12,9 @@
       <excludeFolder url="file://$MODULE_DIR$/shared/common/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/shared/common/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/shared/common/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/go_router_mvvm/hooks/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/go_router_mvvm/hooks/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bricks/go_router_mvvm/hooks/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

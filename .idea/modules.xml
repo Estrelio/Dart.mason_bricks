@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Dart.mason_bricks.iml" filepath="$PROJECT_DIR$/.idea/Dart.mason_bricks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shared/common/melos_common.iml" filepath="$PROJECT_DIR$/shared/common/melos_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bricks/di/hooks/melos_di_hooks.iml" filepath="$PROJECT_DIR$/bricks/di/hooks/melos_di_hooks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bricks/go_router_mvvm/hooks/melos_go_router_mvvm_hooks.iml" filepath="$PROJECT_DIR$/bricks/go_router_mvvm/hooks/melos_go_router_mvvm_hooks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bricks/getx_mvvm/hooks/melos_mvvm_hooks.iml" filepath="$PROJECT_DIR$/bricks/getx_mvvm/hooks/melos_mvvm_hooks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_mason_bricks.iml" filepath="$PROJECT_DIR$/melos_mason_bricks.iml" />
     </modules>
   </component>
 </project>

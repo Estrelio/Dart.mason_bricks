@@ -24,14 +24,13 @@
  *
  */
 
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
-library common;
+import 'package:common/common.dart';
 
-export 'src/common_base.dart';
-export 'src/constant.dart';
-export 'src/core/ansi.dart';
-export 'src/core/import_path_resolver.dart';
-export 'src/extensions/directory_extension.dart';
-export 'src/extensions/hook_context_extension.dart';
+class MvvmConstant {
+  MvvmConstant._();
+
+  static const String placeholderName = Constant.placeholderName;
+
+  static const String nameKey = Constant.nameKey;
+  static const String dataKey = 'data';
+}

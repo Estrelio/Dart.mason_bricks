@@ -59,7 +59,7 @@ void _printRouteRegistrationCode({
   */
   sb.writeln();
 
-  sb.writeln(_wrapAnsiGreenColor(
+  sb.writeln(Ansi.wrapAnsiGreenColor(
     message: 'Here is your route registration code:',
   ));
   sb.writeln();
@@ -81,7 +81,7 @@ void _printRouteName({
 }) {
   sb.writeln();
 
-  sb.writeln(_wrapAnsiGreenColor(
+  sb.writeln(Ansi.wrapAnsiGreenColor(
     message: 'Here is your route name:',
   ));
   sb.writeln();
@@ -89,10 +89,4 @@ void _printRouteName({
   final String camelCaseViewName = viewName.camelCase;
   sb.writeln(
       "static const String ${camelCaseViewName} = '/${camelCaseViewName}';");
-}
-
-String _wrapAnsiGreenColor({
-  required String message,
-}) {
-  return '\x1B[32m$message\x1B[0m';
 }
