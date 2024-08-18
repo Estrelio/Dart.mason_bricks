@@ -47,7 +47,9 @@ void run(HookContext context) {
           <String>[];
 
   final StringBuffer sb = StringBuffer();
-  sb.writeln('You may copy the following code to your service locator file:');
+  sb.writeln(
+    'You may copy on of the following codes to your service locator file:',
+  );
 
   void writeBindingCode() {
     const String styleKey = DiConstant.styleKey;

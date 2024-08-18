@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:mason/mason.dart';
 
 sealed class DiImplementationWriter {
@@ -53,21 +54,59 @@ class GetItDiImplementationWriter extends DiImplementationWriter {
   void write({
     required String? implementation,
   }) {
-    /* Example:
-    GetIt.I.registerLazySingleton<AppointmentRepositoryService>(
-      () => MockAppointmentRepositoryService(),
-    );
-  */
     if (implementation != null) {
       sb.writeln('/// ${implementation} implementation:');
     }
-    sb.writeln(
-      'Get.registerLazySingleton<${serviceName}>(',
-    );
-    sb.writeln(
-      '\t() => ${implementation?.pascalCase ?? ''}${serviceName}(),',
-    );
-    sb.writeln(');');
+    {
+      /* Example:
+        GetIt.I.registerSingleton<AppointmentRepositoryService>(
+          MockAppointmentRepositoryService(),
+        );
+      */
+      sb.writeln(Ansi.wrapAnsiGreenColor(message: 'Register Singleton:'));
+      sb.writeln();
+      sb.writeln(
+        'GetIt.I.registerSingleton<${serviceName}>(',
+      );
+      sb.writeln(
+        '  ${implementation?.pascalCase ?? ''}${serviceName}(),',
+      );
+      sb.writeln(');');
+    }
+    sb.writeln('---------------------------------------------------------');
+    {
+      /* Example:
+        GetIt.I.registerLazySingleton<AppointmentRepositoryService>(
+          () => MockAppointmentRepositoryService(),
+        );
+      */
+      sb.writeln(Ansi.wrapAnsiGreenColor(message: 'Register Lazy Singleton:'));
+      sb.writeln();
+      sb.writeln(
+        'GetIt.I.registerLazySingleton<${serviceName}>(',
+      );
+      sb.writeln(
+        '  () => ${implementation?.pascalCase ?? ''}${serviceName}(),',
+      );
+      sb.writeln(');');
+    }
+    sb.writeln('---------------------------------------------------------');
+    {
+      /* Example:
+        GetIt.I.registerFactory<AppointmentRepositoryService>(
+          () => MockAppointmentRepositoryService(),
+        );
+      */
+      sb.writeln(Ansi.wrapAnsiGreenColor(message: 'Register factory:'));
+      sb.writeln();
+      sb.writeln(
+        'GetIt.I.registerFactory<${serviceName}>(',
+      );
+      sb.writeln(
+        '  () => ${implementation?.pascalCase ?? ''}${serviceName}(),',
+      );
+      sb.writeln(');');
+    }
     sb.writeln();
   }
 }
