@@ -31,8 +31,3 @@ vars:
     description: Your name
     default: __name
     prompt: What is your name? (Default to __name, which will be replaced with the directory name)
-  data:
-    type: boolean
-    description: Include data for argument parsing
-    default: false
-    prompt: Include data for argument parsing?

@@ -32,5 +32,4 @@ class MvvmConstant {
   static const String placeholderName = Constant.placeholderName;
 
   static const String nameKey = Constant.nameKey;
-  static const String dataKey = 'data';
 }
