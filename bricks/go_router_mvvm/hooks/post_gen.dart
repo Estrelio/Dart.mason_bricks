@@ -1,5 +1,6 @@
 import 'package:common/common.dart';
 import 'package:mason/mason.dart';
+import 'package:uuid/uuid.dart';
 
 void run(HookContext context) {
   context.dumpVariables();
@@ -23,27 +24,34 @@ void _printRouteRegistrationCode({
 }) {
   /* Example:
     GoRoute(
-      path: RouteName.product,
+      name: registerName ? RouteName.endpointSwitcher : null,
+      path: RouteName.endpointSwitcher,
+      parentNavigatorKey:
+          registerName ? _navigationService.rootNavigatorKey : null,
       builder: (
         BuildContext context,
         GoRouterState state,
       ) {
-        return GoRouterMvvm<ProductViewModel, ProductViewModelData>(
-          viewArg: _parseState<ProductViewModelData>(
+        return GoRouterMvvm<EndpointSwitcherViewModel,
+            EndpointSwitcherViewModelData>(
+          viewArg: _parseState<EndpointSwitcherViewModelData>(
             state: state,
             fromJson: (Map<String, dynamic> json) =>
-                ProductViewModelData.fromJson(json),
+                EndpointSwitcherViewModelData.fromJson(json),
           ),
           vmGetter: () {
-            GetIt.I.pushNewScope();
-            final ProductViewModel vm = ProductViewModel();
+            const String scopeName =
+                'EndpointSwitcherViewModel:0191b33e-af0b-78a2-a0ff-3cec9ab08530';
+            GetIt.I.pushNewScope(scopeName: scopeName);
+            final EndpointSwitcherViewModel vm =
+                EndpointSwitcherViewModel();
             GetIt.I.registerSingleton(vm);
-            return vm;
+            return (vm, scopeName);
           },
-          onDisposed: () {
-            GetIt.I.popScope();
+          onDisposed: (String scopeName) {
+            GetIt.I.dropScope(scopeName);
           },
-          child: const ProductView(),
+          child: const EndpointSwitcherView(),
         );
       },
     ),
@@ -58,6 +66,7 @@ void _printRouteRegistrationCode({
   final String pascalCaseViewName = '${viewName.pascalCase}View';
   final String pascalCaseViewModelName = '${pascalCaseViewName}Model';
   final String pascalCaseViewModelDataName = '${pascalCaseViewName}ModelData';
+  final String vmUuid = Uuid().v7();
   sb.writeln("GoRoute(");
   sb.writeln("  path: RoutePath.${viewName.camelCase},");
   sb.writeln("  builder: (");
@@ -72,14 +81,16 @@ void _printRouteRegistrationCode({
   sb.writeln("          ${pascalCaseViewModelDataName}.fromJson(json),");
   sb.writeln("    ),");
   sb.writeln("    vmGetter: () {");
-  sb.writeln("      GetIt.I.pushNewScope();");
+  sb.writeln(
+      "      const String scopeName = '${pascalCaseViewModelName}:${vmUuid}';");
+  sb.writeln("      GetIt.I.pushNewScope(scopeName: scopeName);");
   sb.writeln(
       "      final ${pascalCaseViewModelName} vm = ${pascalCaseViewModelName}();");
   sb.writeln("      GetIt.I.registerSingleton(vm);");
-  sb.writeln("      return vm;");
+  sb.writeln("      return (vm, scopeName);");
   sb.writeln("    },");
-  sb.writeln("    onDisposed: () {");
-  sb.writeln("      GetIt.I.popScope();");
+  sb.writeln("    onDisposed: (String scopeName) {");
+  sb.writeln("      GetIt.I.dropScope(scopeName);");
   sb.writeln("    },");
   sb.writeln("    child: const ${pascalCaseViewName}(),");
   sb.writeln("  );");
