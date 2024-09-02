@@ -1,6 +1,5 @@
 import 'package:common/common.dart';
 import 'package:mason/mason.dart';
-import 'package:uuid/uuid.dart';
 
 void run(HookContext context) {
   context.dumpVariables();
@@ -66,7 +65,6 @@ void _printRouteRegistrationCode({
   final String pascalCaseViewName = '${viewName.pascalCase}View';
   final String pascalCaseViewModelName = '${pascalCaseViewName}Model';
   final String pascalCaseViewModelDataName = '${pascalCaseViewName}ModelData';
-  final String vmUuid = Uuid().v7();
   sb.writeln("GoRoute(");
   sb.writeln("  path: RoutePath.${viewName.camelCase},");
   sb.writeln("  builder: (");
@@ -82,7 +80,7 @@ void _printRouteRegistrationCode({
   sb.writeln("    ),");
   sb.writeln("    vmGetter: () {");
   sb.writeln(
-      "      const String scopeName = '${pascalCaseViewModelName}:${vmUuid}';");
+      "      final String scopeName = '${pascalCaseViewModelName}:\${const Uuid().v7()}';");
   sb.writeln("      GetIt.I.pushNewScope(scopeName: scopeName);");
   sb.writeln(
       "      final ${pascalCaseViewModelName} vm = ${pascalCaseViewModelName}();");
