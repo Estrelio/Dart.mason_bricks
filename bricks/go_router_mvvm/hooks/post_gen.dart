@@ -39,13 +39,10 @@ void _printRouteRegistrationCode({
                 EndpointSwitcherViewModelData.fromJson(json),
           ),
           vmGetter: () {
-            const String scopeName =
-                'EndpointSwitcherViewModel:0191b33e-af0b-78a2-a0ff-3cec9ab08530';
-            GetIt.I.pushNewScope(scopeName: scopeName);
-            final EndpointSwitcherViewModel vm =
-                EndpointSwitcherViewModel();
-            GetIt.I.registerSingleton(vm);
-            return (vm, scopeName);
+            return _generateViewModel(
+              vmName: 'DiscoverViewModel',
+              vmBuilder: () => DiscoverViewModel(),
+            );
           },
           onDisposed: (String scopeName) {
             GetIt.I.dropScope(scopeName);
@@ -79,13 +76,10 @@ void _printRouteRegistrationCode({
   sb.writeln("          ${pascalCaseViewModelDataName}.fromJson(json),");
   sb.writeln("    ),");
   sb.writeln("    vmGetter: () {");
-  sb.writeln(
-      "      final String scopeName = '${pascalCaseViewModelName}:\${const Uuid().v7()}';");
-  sb.writeln("      GetIt.I.pushNewScope(scopeName: scopeName);");
-  sb.writeln(
-      "      final ${pascalCaseViewModelName} vm = ${pascalCaseViewModelName}();");
-  sb.writeln("      GetIt.I.registerSingleton(vm);");
-  sb.writeln("      return (vm, scopeName);");
+  sb.writeln("      return _generateViewModel(");
+  sb.writeln("        vmName: '${pascalCaseViewModelName}',");
+  sb.writeln("        vmBuilder: () => ${pascalCaseViewModelName}(),");
+  sb.writeln("      );");
   sb.writeln("    },");
   sb.writeln("    onDisposed: (String scopeName) {");
   sb.writeln("      GetIt.I.dropScope(scopeName);");
