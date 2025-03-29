@@ -70,13 +70,13 @@ void _printRouteRegistrationCode({
   sb.writeln("  ) {");
   sb.writeln(
       "  return GoRouterMvvm<${pascalCaseViewModelName}, ${pascalCaseViewModelDataName}>(");
-  sb.writeln("    viewArg: _parseState<${pascalCaseViewModelDataName}>(");
+  sb.writeln("    viewArg: parseState<${pascalCaseViewModelDataName}>(");
   sb.writeln("      state: state,");
   sb.writeln("      fromJson: (Map<String, dynamic> json) =>");
   sb.writeln("          ${pascalCaseViewModelDataName}.fromJson(json),");
   sb.writeln("    ),");
   sb.writeln("    vmGetter: () {");
-  sb.writeln("      return _generateViewModel(");
+  sb.writeln("      return generateViewModel(");
   sb.writeln("        vmName: '${pascalCaseViewModelName}',");
   sb.writeln("        vmBuilder: () => ${pascalCaseViewModelName}(),");
   sb.writeln("      );");
