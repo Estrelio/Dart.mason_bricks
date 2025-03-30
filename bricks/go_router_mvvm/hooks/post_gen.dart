@@ -33,13 +33,13 @@ void _printRouteRegistrationCode({
       ) {
         return GoRouterMvvm<EndpointSwitcherViewModel,
             EndpointSwitcherViewModelData>(
-          viewArg: _parseState<EndpointSwitcherViewModelData>(
+          viewArg: parseState<EndpointSwitcherViewModelData>(
             state: state,
             fromJson: (Map<String, dynamic> json) =>
                 EndpointSwitcherViewModelData.fromJson(json),
           ),
           vmGetter: () {
-            return _generateViewModel(
+            return generateViewModel(
               vmName: 'DiscoverViewModel',
               vmBuilder: () => DiscoverViewModel(),
             );
