@@ -4,6 +4,8 @@ import 'package:mason/mason.dart';
 void run(HookContext context) {
   context.dumpVariables();
   final String viewName = (context.vars[Constant.nameKey] as String).pascalCase;
+  final String routeClassName =
+      context.vars[Constant.routeClassNameKey] as String;
 
   final StringBuffer sb = StringBuffer();
   _printRouteName(
@@ -13,6 +15,7 @@ void run(HookContext context) {
   _printRouteRegistrationCode(
     sb: sb,
     viewName: viewName,
+    routeClassName: routeClassName,
   );
   context.logger.info(sb.toString());
 }
@@ -20,11 +23,11 @@ void run(HookContext context) {
 void _printRouteRegistrationCode({
   required StringBuffer sb,
   required String viewName,
+  required String routeClassName,
 }) {
   /* Example:
     GoRoute(
-      name: registerName ? RouteName.endpointSwitcher : null,
-      path: RouteName.endpointSwitcher,
+      path: RoutePath.endpointSwitcher,
       parentNavigatorKey:
           registerName ? _navigationService.rootNavigatorKey : null,
       builder: (
@@ -50,7 +53,7 @@ void _printRouteRegistrationCode({
           child: const EndpointSwitcherView(),
         );
       },
-    ),
+    )
   */
   sb.writeln();
 
@@ -63,7 +66,7 @@ void _printRouteRegistrationCode({
   final String pascalCaseViewModelName = '${pascalCaseViewName}Model';
   final String pascalCaseViewModelDataName = '${pascalCaseViewName}ModelData';
   sb.writeln("GoRoute(");
-  sb.writeln("  path: RoutePath.${viewName.camelCase},");
+  sb.writeln("  path: ${routeClassName}.${viewName.camelCase},");
   sb.writeln("  builder: (");
   sb.writeln("    BuildContext context,");
   sb.writeln("    GoRouterState state,");
@@ -87,7 +90,7 @@ void _printRouteRegistrationCode({
   sb.writeln("    child: const ${pascalCaseViewName}(),");
   sb.writeln("  );");
   sb.writeln("},");
-  sb.writeln("),");
+  sb.writeln(")");
 }
 
 void _printRouteName({

@@ -30,4 +30,6 @@ class Constant {
   static const String placeholderName = '__name';
 
   static const String nameKey = 'name';
+
+  static const String routeClassNameKey = 'route-class-name';
 }

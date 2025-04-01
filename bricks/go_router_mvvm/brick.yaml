@@ -31,3 +31,8 @@ vars:
     description: Your name
     default: __name
     prompt: What is your name? (Default to __name, which will be replaced with the directory name)
+  route-class-name:
+    type: string
+    description: The name of the route class
+    default: RoutePath
+    prompt: What is the name of the route class? (Default to RoutePath)
