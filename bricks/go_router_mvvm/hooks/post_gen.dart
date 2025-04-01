@@ -37,6 +37,7 @@ void _printRouteRegistrationCode({
         return GoRouterMvvm<EndpointSwitcherViewModel,
             EndpointSwitcherViewModelData>(
           viewArg: parseState<EndpointSwitcherViewModelData>(
+            context: context,
             state: state,
             fromJson: (Map<String, dynamic> json) =>
                 EndpointSwitcherViewModelData.fromJson(json),
@@ -74,6 +75,7 @@ void _printRouteRegistrationCode({
   sb.writeln(
       "  return GoRouterMvvm<${pascalCaseViewModelName}, ${pascalCaseViewModelDataName}>(");
   sb.writeln("    viewArg: parseState<${pascalCaseViewModelDataName}>(");
+  sb.writeln("      context: context,");
   sb.writeln("      state: state,");
   sb.writeln("      fromJson: (Map<String, dynamic> json) =>");
   sb.writeln("          ${pascalCaseViewModelDataName}.fromJson(json),");
