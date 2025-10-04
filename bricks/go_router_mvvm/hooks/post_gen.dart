@@ -109,5 +109,5 @@ void _printRouteName({
   // Example: static const String home = '/home';
   final String camelCaseViewName = viewName.camelCase;
   sb.writeln(
-      "static const String ${camelCaseViewName} = '/${camelCaseViewName}';");
+      "static const String ${camelCaseViewName} = '${camelCaseViewName}';");
 }

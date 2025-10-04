@@ -32,4 +32,6 @@ class Constant {
   static const String nameKey = 'name';
 
   static const String routeClassNameKey = 'route-class-name';
+
+  static const String includeEventHandlingKey = 'includeEventHandling';
 }

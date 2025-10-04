@@ -36,3 +36,8 @@ vars:
     description: The name of the route class
     default: RoutePath
     prompt: What is the name of the route class? (Default to RoutePath)
+  includeEventHandling:
+    type: boolean
+    description: Include event handling
+    default: false
+    prompt: Do you want to include event handling? (Default to false)
